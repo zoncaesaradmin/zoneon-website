@@ -1,39 +1,91 @@
-const verticals = {
-  hospitality: { label: "Hospitality", title: "Property and guest operations", summary: "A guest-facing and staff-facing experience shaped around the rhythm of a property, with the appliance kept on-site.", fit: "Environments where service quality, continuity, and local control matter.", points: ["Guest service workflows that remain available on the property", "Operations tools for staff, scheduling, and coordination", "Private daily visibility for the people running the site"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  training: { label: "Training", title: "Learning and simulation environments", summary: "A repeatable environment for structured learning, guided practice, and controlled operational scenarios.", fit: "Organizations that want dependable training in classrooms, labs, or private internal programs.", points: ["Scenario-driven learning flows with consistent operating conditions", "On-site environments without outside dependency", "Demonstration setups adapted for different audiences"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  operations: { label: "Operations", title: "Branch, edge, and field deployments", summary: "A practical appliance-led approach for organizations that need local resilience across sites.", fit: "Distributed teams that need repeatability across branches, remote sites, or controlled environments.", points: ["Operational views tailored to each location", "Consistent rollout patterns across teams and sites", "Local continuity when connectivity is limited"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  "private-ai": { label: "Private AI", title: "Internal tools and controlled workflows", summary: "AI-assisted internal experiences that stay close to the business environment and its operating choices.", fit: "Teams that want helpful automation without making public cloud their default.", points: ["Private assistants for internal search, guidance, and task support", "Workflow tools kept close to the business environment", "Controlled operation for organizations that value privacy"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-};
+const verticals = [
+  { key: "training", label: "Training", title: "Learning and simulation environments", teaser: "Repeatable learning and practice.", summary: "A repeatable environment for structured learning, guided practice, and controlled operational scenarios.", fit: "Organizations that want dependable training in classrooms, labs, or private internal programs.", points: ["Scenario-driven learning flows with consistent operating conditions", "On-site environments without outside dependency", "Demonstration setups adapted for different audiences"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+  { key: "events", label: "Events", title: "Venue and attendee operations", teaser: "Reliable experiences for every event.", summary: "An event-facing software environment that supports attendee experiences and venue operations without depending on public internet access.", fit: "Venues, organizers, and event teams that need reliable on-site coordination and attendee service.", points: ["Attendee-facing workflows that remain available throughout an event", "Venue operations for schedules, staff, and live coordination", "Private operational visibility for the people running the experience"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+  { key: "hospitality", label: "Hospitality", title: "Property and guest operations", teaser: "On-site service. Private control.", summary: "A guest-facing and staff-facing experience shaped around the rhythm of a property, with the appliance kept on-site.", fit: "Hotels and hospitality teams where service quality, continuity, and local control matter.", points: ["Guest service workflows that remain available on the property", "Operations tools for staff, scheduling, and coordination", "Private daily visibility for the people running the site"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+  { key: "operations", label: "Managed Service Provider", title: "Branch, edge, and field infrastructure deployments", teaser: "Reliable across sites and teams.", summary: "A practical appliance-led approach for organizations that need local resilience across sites.", fit: "Distributed teams that need repeatability across branches, remote sites, or controlled environments.", points: ["Operational views tailored to each location", "Consistent rollout patterns across teams and sites", "Local continuity when connectivity is limited"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+  { key: "private-ai", label: "Private AI", title: "Internal tools and controlled workflows", teaser: "Useful AI, kept close to your team.", summary: "AI-assisted internal experiences that stay close to the business environment and its operating choices.", fit: "Teams that want helpful automation without making public cloud their default.", points: ["Private assistants for internal search, guidance, and task support", "Workflow tools kept close to the business environment", "Controlled operation for organizations that value privacy"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+];
 
-const cards = document.querySelectorAll(".vertical-card");
-const label = document.getElementById("detail-label");
-const title = document.getElementById("detail-title");
-const summary = document.getElementById("detail-summary");
-const fit = document.getElementById("detail-fit");
-const points = document.getElementById("detail-points");
-const modes = document.getElementById("detail-modes");
+const deployments = [
+  { key: "portable-node", label: "Portable", title: "Single portable node", teaser: "Self-contained and ready to move.", summary: "A single appliance carries the solution wherever it is needed, with no dependency on an existing site network.", fit: "Demos, temporary installations, field work, and smaller environments that need a self-contained setup.", points: ["Runs the selected solution on one compact appliance", "Connect locally when needed, without requiring a permanent LAN", "Moves easily between sites, teams, or use cases"], modes: ["Portable", "Standalone", "Local-first"] },
+  { key: "lan-nodes", label: "Existing LAN", title: "Single-node or multi-node in an existing LAN", teaser: "Built into the network you already use.", summary: "One or more nodes operate within an existing local network, keeping services close to the people and devices that rely on them.", fit: "Organizations with an established on-site LAN that want to add local capacity gradually.", points: ["Starts with one node and expands when demand grows", "Uses the existing LAN for nearby users and devices", "Keeps day-to-day operation within the organization"], modes: ["Local LAN", "Scalable", "On-site"] },
+  { key: "vps-nodes", label: "Self-hosted VPS", title: "Single-node or multi-node in a self-hosted VPS", teaser: "Private infrastructure beyond one site.", summary: "A self-hosted VPS provides a controlled base for one or more nodes when a solution needs reach beyond a single physical location.", fit: "Teams that need private remote access, wider availability, or coordination across locations.", points: ["Runs on infrastructure you manage and control", "Supports one node now and additional nodes later", "Provides a private foundation for distributed access"], modes: ["Self-hosted VPS", "Scalable", "Remote reach"] },
+  { key: "lan-cloud-backup", label: "LAN + backup", title: "Single-node or multi-node LAN with cloud backup", teaser: "Local operation with protected recovery.", summary: "The solution runs locally on the LAN while selected data is backed up to the cloud for recovery and continuity.", fit: "Organizations that want local performance and control with an additional recovery layer.", points: ["Keeps primary operation on the local network", "Backs up selected data on a defined schedule", "Restores confidently if a local device needs replacement"], modes: ["Local LAN", "Cloud backup", "Recovery-ready"] },
+];
 
-function renderVertical(key) {
-  const item = verticals[key];
-  if (!item) return;
-  label.textContent = item.label;
-  title.textContent = item.title;
-  summary.textContent = item.summary;
-  fit.textContent = item.fit;
-  points.innerHTML = item.points.map((point) => `<li>${point}</li>`).join("");
-  modes.innerHTML = item.modes.map((mode) => `<span>${mode}</span>`).join("");
-  cards.forEach((card) => {
-    const selected = card.dataset.vertical === key;
-    card.classList.toggle("is-selected", selected);
-    card.setAttribute("aria-selected", selected ? "true" : "false");
+function setupSelector({ items, gridSelector, detailId, cardClass, tabPrefix, fields }) {
+  const grid = document.querySelector(gridSelector);
+  const detailCard = document.getElementById(detailId);
+  const detailFields = Object.fromEntries(Object.entries(fields).map(([name, id]) => [name, document.getElementById(id)]));
+  const itemsByKey = new Map(items.map((item) => [item.key, item]));
+
+  grid.replaceChildren(...items.map((item) => {
+    const card = document.createElement("button");
+    card.className = cardClass;
+    card.type = "button";
+    card.role = "tab";
+    card.id = `${tabPrefix}-tab-${item.key}`;
+    card.dataset.option = item.key;
+    card.setAttribute("aria-controls", detailId);
+    card.setAttribute("aria-selected", "false");
+    card.innerHTML = `<span class="vertical-tag">${item.label}</span><strong>${item.title}</strong><p>${item.teaser}</p>`;
+    return card;
+  }));
+
+  const cards = [...grid.querySelectorAll(`.${cardClass}`)];
+  function render(key) {
+    const item = itemsByKey.get(key);
+    if (!item) return;
+    detailFields.label.textContent = item.label;
+    detailFields.title.textContent = item.title;
+    detailFields.summary.textContent = item.summary;
+    detailFields.fit.textContent = item.fit;
+    detailFields.points.innerHTML = item.points.map((point) => `<li>${point}</li>`).join("");
+    detailFields.modes.innerHTML = item.modes.map((mode) => `<span>${mode}</span>`).join("");
+    cards.forEach((card) => {
+      const selected = card.dataset.option === key;
+      card.classList.toggle("is-selected", selected);
+      card.setAttribute("aria-selected", selected ? "true" : "false");
+      if (selected) detailCard.setAttribute("aria-labelledby", card.id);
+    });
+  }
+
+  cards.forEach((card, index) => card.addEventListener("click", () => {
+    render(card.dataset.option);
+    history.replaceState(null, "", `#${card.dataset.option}`);
+    cards[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }));
+
+  grid.addEventListener("keydown", (event) => {
+    const currentIndex = cards.indexOf(document.activeElement);
+    if (currentIndex < 0) return;
+    const previousKey = event.key === "ArrowLeft" || event.key === "ArrowUp";
+    const nextKey = event.key === "ArrowRight" || event.key === "ArrowDown";
+    if (!previousKey && !nextKey && event.key !== "Home" && event.key !== "End") return;
+    event.preventDefault();
+    const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? cards.length - 1 : (currentIndex + (nextKey ? 1 : -1) + cards.length) % cards.length;
+    cards[nextIndex].focus();
+    render(cards[nextIndex].dataset.option);
   });
+
+  const initialKey = window.location.hash.replace("#", "");
+  render(itemsByKey.has(initialKey) ? initialKey : items[0].key);
 }
 
-cards.forEach((card) => card.addEventListener("click", () => {
-  const key = card.dataset.vertical;
-  renderVertical(key);
-  history.replaceState(null, "", `#${key}`);
-}));
+setupSelector({
+  items: verticals,
+  gridSelector: ".vertical-grid",
+  detailId: "vertical-detail",
+  cardClass: "vertical-card",
+  tabPrefix: "vertical",
+  fields: { label: "detail-label", title: "detail-title", summary: "detail-summary", fit: "detail-fit", points: "detail-points", modes: "detail-modes" },
+});
 
-const initialVertical = window.location.hash.replace("#", "");
-renderVertical(initialVertical in verticals ? initialVertical : "hospitality");
+setupSelector({
+  items: deployments,
+  gridSelector: ".deployment-selector",
+  detailId: "deployment-detail",
+  cardClass: "deployment-option",
+  tabPrefix: "deployment",
+  fields: { label: "deployment-detail-label", title: "deployment-detail-title", summary: "deployment-detail-summary", fit: "deployment-detail-fit", points: "deployment-detail-points", modes: "deployment-detail-modes" },
+});

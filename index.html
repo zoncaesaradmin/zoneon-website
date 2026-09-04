@@ -14,7 +14,7 @@
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <a class="brand" href="#top" aria-label="ZoneON Technologies home">
+        <a class="brand" href="#" aria-label="ZoneON Technologies home">
           <span class="brand-mark" aria-hidden="true"><span class="brand-z">Z</span><span class="brand-on">ON</span></span>
           <span class="brand-text">ZoneON Technologies</span>
         </a>
@@ -78,34 +78,13 @@
         <section class="section-block" id="verticals">
           <div class="section-heading">
             <p class="eyebrow">Solutions by vertical</p>
-            <h2>One appliance can become many useful solutions.</h2>
+            <h2>Purpose-built software appliances for each domain.</h2>
           </div>
 
           <div class="vertical-layout">
-            <div class="vertical-grid" role="tablist" aria-label="Vertical solutions">
-              <button class="vertical-card is-selected" type="button" role="tab" aria-selected="true" aria-controls="vertical-detail" data-vertical="hospitality">
-                <span class="vertical-tag">Hospitality</span>
-                <strong>Property and guest operations</strong>
-                <p>On-site service. Private control.</p>
-              </button>
-              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="training">
-                <span class="vertical-tag">Training</span>
-                <strong>Learning and simulation environments</strong>
-                <p>Repeatable learning and practice.</p>
-              </button>
-              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="operations">
-                <span class="vertical-tag">Operations</span>
-                <strong>Branch, edge, and field deployments</strong>
-                <p>Reliable across sites and teams.</p>
-              </button>
-              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="private-ai">
-                <span class="vertical-tag">Private AI</span>
-                <strong>Internal tools and controlled workflows</strong>
-                <p>Useful AI, kept close to your team.</p>
-              </button>
-            </div>
+            <div class="vertical-grid" role="tablist" aria-label="Vertical solutions"></div>
 
-            <article class="detail-card" id="vertical-detail" aria-live="polite">
+            <article class="detail-card" id="vertical-detail" role="tabpanel" aria-labelledby="vertical-tab-hospitality" aria-live="polite" tabindex="0">
               <div class="detail-header">
                 <span class="detail-label" id="detail-label">Hospitality</span>
                 <h3 id="detail-title">Property and guest operations</h3>
@@ -134,13 +113,29 @@
 
         <section class="section-block deployment-section" id="deploy">
           <div class="section-heading">
-            <p class="eyebrow">Deployment options</p>
-            <h2>Local by design. Connected only when it helps.</h2>
+            <p class="eyebrow">Deployment options for each solution</p>
+            <h2>Local by design. Works with or without internet.</h2>
           </div>
-          <div class="deployment-grid">
-            <article class="deployment-card deployment-card-featured"><span class="deployment-label">Local LAN</span><h3>The primary way to run</h3><p>Put the appliance on your own network and keep day-to-day operation close to the people, devices, and data it serves.</p></article>
-            <article class="deployment-card"><span class="deployment-label">Air-gapped</span><h3>Protected from public internet</h3><p>For environments that need stronger separation, the appliance can run with no public internet connection at all.</p></article>
-            <article class="deployment-card"><span class="deployment-label">VPS / Cloud</span><h3>Optional reach beyond the site</h3><p>When a solution needs remote access or wider reach, an external deployment can complement the local appliance.</p></article>
+          <div class="deployment-layout">
+            <div class="deployment-selector" role="tablist" aria-label="Deployment options"></div>
+            <article class="detail-card" id="deployment-detail" role="tabpanel" aria-live="polite" tabindex="0">
+              <div class="detail-header">
+                <span class="detail-label" id="deployment-detail-label"></span>
+                <h3 id="deployment-detail-title"></h3>
+                <p id="deployment-detail-summary"></p>
+              </div>
+              <div class="detail-columns">
+                <div>
+                  <h4>How it works</h4>
+                  <ul id="deployment-detail-points"></ul>
+                </div>
+                <div>
+                  <h4>Best fit</h4>
+                  <p id="deployment-detail-fit"></p>
+                  <div class="mode-pills" id="deployment-detail-modes" aria-label="Deployment characteristics"></div>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
