@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoneon Technologies</title>
+    <meta
+      name="description"
+      content="A protected software appliance for local networks and air-gapped environments, built to power multiple solutions with optional VPS or cloud reach."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Zoneon Technologies home">
+          <span class="brand-mark" aria-hidden="true"><span class="brand-z">Z</span><span class="brand-on">ON</span></span>
+          <span class="brand-text">Zoneon Technologies</span>
+        </a>
+        <nav class="topnav" aria-label="Primary">
+          <a href="#verticals">Solutions</a>
+          <a href="#deploy">Deployment</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">One appliance model. Many solutions.</p>
+            <h1>One appliance. Multiple solutions. Built for the way you operate.</h1>
+            <p class="intro">A complete software appliance for the places where privacy, continuity, and local control matter.</p>
+            <div class="cta-row">
+              <a class="button button-primary" href="#verticals">Explore Solutions</a>
+              <a class="button button-secondary" href="#contact">Request a Walkthrough</a>
+            </div>
+          </div>
+          <aside class="deployment-map" aria-label="Appliance deployment model">
+            <div class="map-heading">
+              <span class="signal-kicker">Your own appliance.</span>
+              <strong>Your own local network.</strong>
+            </div>
+            <div class="map-stage">
+              <div class="network-field">
+                <div class="lan-label"><span class="lan-dot"></span><strong>Local LAN</strong><small>Primary home</small></div>
+                <div class="airgap-label"><span class="shield-mark" aria-hidden="true"></span><strong>Air-gapped ready</strong><small>Connection to public internet is optional</small></div>
+                <div class="extension-label"><strong>VPS / Cloud</strong><small>Optional reach</small></div>
+              </div>
+            </div>
+            <p class="map-caption"><span></span>The appliance stays under your control at the place where work happens.</p>
+          </aside>
+        </section>
+
+        <section class="proof-strip" aria-label="Core themes">
+          <div><span class="proof-icon">◫</span><span class="proof-label">One appliance</span><p>Many solution directions</p></div>
+          <div><span class="proof-icon">⌁</span><span class="proof-label">Protected locally</span><p>LAN or air-gapped</p></div>
+          <div><span class="proof-icon">↗</span><span class="proof-label">Optional reach</span><p>VPS / cloud when needed</p></div>
+        </section>
+
+        <section class="section-block" id="verticals">
+          <div class="section-heading">
+            <p class="eyebrow">Solutions by vertical</p>
+            <h2>One appliance can become many useful solutions.</h2>
+          </div>
+
+          <div class="vertical-layout">
+            <div class="vertical-grid" role="tablist" aria-label="Vertical solutions">
+              <button class="vertical-card is-selected" type="button" role="tab" aria-selected="true" aria-controls="vertical-detail" data-vertical="hospitality">
+                <span class="vertical-tag">Hospitality</span>
+                <strong>Property and guest operations</strong>
+                <p>On-site service. Private control.</p>
+              </button>
+              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="training">
+                <span class="vertical-tag">Training</span>
+                <strong>Learning and simulation environments</strong>
+                <p>Repeatable learning and practice.</p>
+              </button>
+              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="operations">
+                <span class="vertical-tag">Operations</span>
+                <strong>Branch, edge, and field deployments</strong>
+                <p>Reliable across sites and teams.</p>
+              </button>
+              <button class="vertical-card" type="button" role="tab" aria-selected="false" aria-controls="vertical-detail" data-vertical="private-ai">
+                <span class="vertical-tag">Private AI</span>
+                <strong>Internal tools and controlled workflows</strong>
+                <p>Useful AI, kept close to your team.</p>
+              </button>
+            </div>
+
+            <article class="detail-card" id="vertical-detail" aria-live="polite">
+              <div class="detail-header">
+                <span class="detail-label" id="detail-label">Hospitality</span>
+                <h3 id="detail-title">Property and guest operations</h3>
+                <p id="detail-summary">A guest-facing and staff-facing software layer that stays reliable on-site while still supporting central oversight when needed.</p>
+              </div>
+              <div class="detail-columns">
+                <div>
+                  <h4>What this can include</h4>
+                  <ul id="detail-points">
+                    <li>Guest service workflows that remain available on premises</li>
+                    <li>Property operations tools for staff, scheduling, and coordination</li>
+                    <li>Private dashboards for daily visibility without depending on public internet</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Best fit</h4>
+                  <p id="detail-fit">Environments where service quality matters, connectivity may vary, and local control is important.</p>
+                  <div class="mode-pills" id="detail-modes" aria-label="Supported deployment modes">
+                    <span>Local LAN</span><span>Air-gapped</span><span>VPS / Cloud</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-block deployment-section" id="deploy">
+          <div class="section-heading">
+            <p class="eyebrow">Deployment options</p>
+            <h2>Local by design. Connected only when it helps.</h2>
+          </div>
+          <div class="deployment-grid">
+            <article class="deployment-card deployment-card-featured"><span class="deployment-label">Local LAN</span><h3>The primary way to run</h3><p>Put the appliance on your own network and keep day-to-day operation close to the people, devices, and data it serves.</p></article>
+            <article class="deployment-card"><span class="deployment-label">Air-gapped</span><h3>Protected from public internet</h3><p>For environments that need stronger separation, the appliance can run with no public internet connection at all.</p></article>
+            <article class="deployment-card"><span class="deployment-label">VPS / Cloud</span><h3>Optional reach beyond the site</h3><p>When a solution needs remote access or wider reach, an external deployment can complement the local appliance.</p></article>
+          </div>
+        </section>
+
+        <section class="section-block contact-section" id="contact">
+          <div class="contact-card">
+            <p class="eyebrow">Next step</p>
+            <h2>Start with the appliance. Shape the solution around the work.</h2>
+            <p>Choose a solution direction, then build the right experience around the people and places it serves.</p>
+            <a class="button button-primary" href="mailto:hello@example.com">Contact for a Demo</a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
