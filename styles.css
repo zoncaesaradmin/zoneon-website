@@ -21,6 +21,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+#verticals, #deploy, #contact-card { scroll-margin-top: 110px; }
 body {
   margin: 0;
   min-width: 320px;
@@ -65,14 +66,17 @@ h1 { max-width: 12ch; font-size: clamp(2.7rem, 5.2vw, 4.7rem); line-height: 0.95
 .deployment-map { align-self: center; padding: 30px; border-radius: var(--radius-xl); color: var(--text-inverse); background: rgba(9, 24, 32, 0.72); border: 1px solid rgba(255, 255, 255, 0.14); backdrop-filter: blur(16px); }
 .hero-side .deployment-map { align-self: stretch; display: flex; flex-direction: column; padding: 20px 24px; }
 .hero-side .map-caption { margin-top: auto; padding-top: 14px; }
-.hero-compute-card { display: flex; flex-direction: column; min-height: 0; padding: 20px 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: var(--radius-lg); color: var(--text-inverse); background-color: rgba(9, 24, 32, 0.72); background-image: linear-gradient(180deg, rgba(9, 24, 32, 0.08), rgba(9, 24, 32, 0.48)), url("./assets/compute-scale.svg?v=8"); background-position: center, top center; background-size: 100% 100%, 100% calc(100% - 54px); background-repeat: no-repeat; box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+.hero-compute-card { display: flex; flex-direction: column; min-height: 0; padding: 20px 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: var(--radius-lg); color: var(--text-inverse); background: rgba(9, 24, 32, 0.72); box-shadow: var(--shadow); backdrop-filter: blur(16px); }
 .hero-compute-card h2, .map-heading strong { display: block; margin: 0; font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif; font-size: clamp(1.45rem, 2.1vw, 2.15rem); line-height: 1.02; letter-spacing: -0.03em; white-space: nowrap; }
-.hero-compute-card h2 { margin-top: 10px; color: rgba(246, 239, 226, 0.88); text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34); }
+.hero-compute-card h2 { margin-top: 10px; color: rgba(246, 239, 226, 0.88); }
 .hero-compute-card .compute-caption { margin-top: auto; padding-top: 14px; }
 .map-heading strong { margin-top: 10px; }
 .signal-kicker, .proof-label, .vertical-tag, .detail-label, .deployment-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; }
 .map-stage { position: relative; min-height: 150px; margin-top: 16px; }
-.network-field { position: relative; height: 150px; overflow: hidden; border: 1px solid rgba(147, 209, 205, 0.18); border-radius: 20px; background: radial-gradient(circle at 48% 56%, rgba(27, 102, 103, 0.27), transparent 31%), linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)); }
+.network-field, .compute-field { position: relative; overflow: hidden; border: 1px solid rgba(147, 209, 205, 0.18); border-radius: 20px; }
+.network-field { height: 150px; background: radial-gradient(circle at 48% 56%, rgba(27, 102, 103, 0.27), transparent 31%), linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)); }
+.compute-stage { display: flex; flex: 1 1 auto; min-height: 104px; margin-top: 16px; }
+.compute-field { flex: 1 1 auto; min-height: 104px; background: url("./assets/compute-scale.svg?v=8") center center / auto 100% no-repeat, radial-gradient(circle at 48% 56%, rgba(27, 102, 103, 0.27), transparent 31%), linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)); }
 .network-field::before, .network-field::after { position: absolute; content: ""; border: 1px solid rgba(147, 209, 205, 0.16); border-radius: 50%; }
 .network-field::before { width: 132px; height: 132px; top: 8px; left: calc(50% - 66px); }
 .network-field::after { width: 92px; height: 92px; top: 28px; left: calc(50% - 46px); border-style: dashed; }
@@ -82,12 +86,12 @@ h1 { max-width: 12ch; font-size: clamp(2.7rem, 5.2vw, 4.7rem); line-height: 0.95
 .lan-label small, .extension-label small { margin-left: 15px; }
 .lan-label, .extension-label { min-height: 48px; justify-content: center; }
 .endpoint-title { display: flex; align-items: center; gap: 8px; }
-.lan-label { top: 12px; left: 12px; padding: 8px 10px; border: 1px solid rgba(240, 163, 110, 0.38); border-radius: 12px; background: rgba(199, 106, 46, 0.12); }
+.lan-label { top: 38%; left: 12px; padding: 8px 10px; border: 1px solid rgba(240, 163, 110, 0.38); border-radius: 12px; background: rgba(199, 106, 46, 0.12); transform: translateY(-50%); }
 .lan-dot, .extension-dot { flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: #f0a36e; box-shadow: 0 0 0 5px rgba(240, 163, 110, 0.13); }
 .airgap-label { bottom: 12px; left: 14px; padding-left: 24px; }
 .shield-mark { position: absolute; top: 4px; left: 0; width: 13px; height: 16px; border: 1.5px solid #93d1cd; border-radius: 7px 7px 9px 9px; }
 .shield-mark::after { position: absolute; top: 3px; left: 4px; width: 3px; height: 6px; content: ""; border-right: 1px solid #93d1cd; border-bottom: 1px solid #93d1cd; transform: rotate(45deg); }
-.extension-label { top: 12px; right: 12px; padding: 8px 10px; border: 1px solid rgba(147, 209, 205, 0.27); border-radius: 12px; background: rgba(147, 209, 205, 0.07); }
+.extension-label { top: 38%; right: 12px; padding: 8px 10px; border: 1px solid rgba(147, 209, 205, 0.27); border-radius: 12px; background: rgba(147, 209, 205, 0.07); transform: translateY(-50%); }
 .map-caption { display: flex; align-items: center; gap: 9px; margin: 22px 0 0; color: rgba(246, 239, 226, 0.77); font-size: 0.91rem; line-height: 1.45; }
 .map-caption span { display: inline-block; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: #f0a36e; box-shadow: 0 0 0 5px rgba(240, 163, 110, 0.14); }
 .proof-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 18px; border-radius: var(--radius-xl); background: rgba(255, 251, 245, 0.76); border: 1px solid rgba(15, 34, 48, 0.08); }
@@ -124,21 +128,28 @@ h1 { max-width: 12ch; font-size: clamp(2.7rem, 5.2vw, 4.7rem); line-height: 0.95
 .deployment-card-featured p { color: rgba(246, 239, 226, 0.82); }
 .capability-grid h3, .deployment-card h3, .contact-card h2 { margin-bottom: 12px; font-size: 1.46rem; line-height: 1.15; }
 .deployment-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.contact-section { padding-bottom: 28px; }
+.contact-section { padding-bottom: 184px; }
 .contact-card { position: relative; overflow: hidden; padding: 34px; }
 .contact-card::after { position: absolute; right: -30px; bottom: -36px; width: 220px; height: 220px; border-radius: 50%; content: ""; background: radial-gradient(circle, rgba(199, 106, 46, 0.18), transparent 64%); }
 .contact-card .button { margin-top: 24px; }
 @media (max-width: 1024px) {
   .hero, .vertical-layout, .detail-columns, .deployment-grid, .proof-strip { grid-template-columns: 1fr; }
   .signal-grid, .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero-side { grid-template-rows: none; }
+  .hero { min-height: auto; }
+  .hero-side { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; align-items: stretch; }
+  .hero-side .deployment-map, .hero-side .hero-compute-card { min-height: 250px; }
   h1 { max-width: 13ch; }
 }
 @media (max-width: 720px) {
+  #verticals, #deploy, #contact-card { scroll-margin-top: 156px; }
   .page-shell { width: min(100% - 20px, 1180px); padding-top: 16px; }
   .topbar { flex-direction: column; align-items: flex-start; border-radius: 28px; }
   .topnav { justify-content: flex-start; }
   .hero-copy, .hero-panel, .detail-card, .contact-card { padding: 24px; }
+  .hero-side { grid-template-columns: 1fr; }
+  .hero-side .deployment-map { min-height: 240px; }
+  .hero-side .hero-compute-card { min-height: 280px; }
+  .compute-stage, .compute-field { min-height: 132px; }
   .signal-grid, .capability-grid { grid-template-columns: 1fr; }
   h1 { font-size: clamp(2.6rem, 16vw, 4.2rem); }
   .section-block { padding-top: 60px; }
