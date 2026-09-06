@@ -9,7 +9,7 @@
       content="A protected software appliance for local networks and air-gapped environments, built to power multiple solutions with optional VPS or cloud reach."
     />
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=preview-2" />
   </head>
   <body>
     <div class="page-shell">
@@ -90,26 +90,35 @@
                 <h3 id="detail-title">Property and guest operations</h3>
                 <p id="detail-summary">A guest-facing and staff-facing software layer that stays reliable on-site while still supporting central oversight when needed.</p>
               </div>
-              <div class="detail-columns">
-                <div>
-                  <h4>What this can include</h4>
+              <div class="detail-body" id="detail-body">
+                <div class="detail-context">
+                  <h4>Where it helps</h4>
+                  <p id="detail-fit">Environments where service quality matters, connectivity may vary, and local control is important.</p>
                   <ul id="detail-points">
                     <li>Guest service workflows that remain available on premises</li>
                     <li>Property operations tools for staff, scheduling, and coordination</li>
                     <li>Private dashboards for daily visibility without depending on public internet</li>
                   </ul>
-                </div>
-                <div>
-                  <h4>Best fit</h4>
-                  <p id="detail-fit">Environments where service quality matters, connectivity may vary, and local control is important.</p>
                   <div class="mode-pills" id="detail-modes" aria-label="Supported deployment modes">
                     <span>Local LAN</span><span>Air-gapped</span><span>VPS / Cloud</span>
                   </div>
                 </div>
+                <button class="solution-preview" id="detail-preview" type="button" aria-haspopup="dialog">
+                  <span class="solution-preview-art" aria-hidden="true"><span class="solution-preview-play">Play</span></span>
+                  <span class="solution-preview-copy"><span>Quick preview</span><strong id="detail-preview-title">Training environment</strong></span>
+                </button>
               </div>
             </article>
           </div>
         </section>
+
+        <dialog class="preview-dialog" id="solution-preview-dialog" aria-labelledby="solution-preview-dialog-title">
+          <div class="preview-dialog-frame">
+            <button class="preview-dialog-close" id="solution-preview-close" type="button" aria-label="Close preview">Close</button>
+            <p class="preview-dialog-label" id="solution-preview-dialog-title">Quick preview</p>
+            <video id="solution-preview-video" controls playsinline preload="metadata"></video>
+          </div>
+        </dialog>
 
         <section class="section-block deployment-section" id="deploy">
           <div class="section-heading">
@@ -149,6 +158,6 @@
         </section>
       </main>
     </div>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=preview-2"></script>
   </body>
 </html>

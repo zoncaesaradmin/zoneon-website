@@ -1,9 +1,9 @@
 const verticals = [
-  { key: "training", label: "Training", title: "Learning and simulation environments", teaser: "Repeatable learning and practice.", summary: "A repeatable environment for structured learning, guided practice, and controlled operational scenarios.", fit: "Organizations that want dependable training in classrooms, labs, or private internal programs.", points: ["Scenario-driven learning flows with consistent operating conditions", "On-site environments without outside dependency", "Demonstration setups adapted for different audiences"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  { key: "events", label: "Events", title: "Venue and attendee operations", teaser: "Reliable experiences for every event.", summary: "An event-facing software environment that supports attendee experiences and venue operations without depending on public internet access.", fit: "Venues, organizers, and event teams that need reliable on-site coordination and attendee service.", points: ["Attendee-facing workflows that remain available throughout an event", "Venue operations for schedules, staff, and live coordination", "Private operational visibility for the people running the experience"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  { key: "hospitality", label: "Hospitality", title: "Property and guest operations", teaser: "On-site service. Private control.", summary: "A guest-facing and staff-facing experience shaped around the rhythm of a property, with the appliance kept on-site.", fit: "Hotels and hospitality teams where service quality, continuity, and local control matter.", points: ["Guest service workflows that remain available on the property", "Operations tools for staff, scheduling, and coordination", "Private daily visibility for the people running the site"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  { key: "operations", label: "Managed Service Provider", title: "Branch, edge, and field infrastructure deployments", teaser: "Reliable across sites and teams.", summary: "A practical appliance-led approach for organizations that need local resilience across sites.", fit: "Distributed teams that need repeatability across branches, remote sites, or controlled environments.", points: ["Operational views tailored to each location", "Consistent rollout patterns across teams and sites", "Local continuity when connectivity is limited"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
-  { key: "private-ai", label: "Private AI", title: "Internal tools and controlled workflows", teaser: "Useful AI, kept close to your team.", summary: "AI-assisted internal experiences that stay close to the business environment and its operating choices.", fit: "Teams that want helpful automation without making public cloud their default.", points: ["Private assistants for internal search, guidance, and task support", "Workflow tools kept close to the business environment", "Controlled operation for organizations that value privacy"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"] },
+  { key: "training", label: "Training", title: "Learning and simulation environments", teaser: "Repeatable learning and practice.", summary: "A repeatable environment for structured learning, guided practice, and controlled operational scenarios.", fit: "Organizations that want dependable training in classrooms, labs, or private internal programs.", points: ["Scenario-driven learning flows with consistent operating conditions", "On-site environments without outside dependency", "Demonstration setups adapted for different audiences"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"], preview: { src: "./assets/training-preview.mp4", thumbnail: "./assets/training-preview-thumbnail.jpeg", title: "Training environment" } },
+  { key: "events", label: "Events", title: "Venue and attendee operations", teaser: "Reliable experiences for every event.", summary: "An event-facing software environment that supports attendee experiences and venue operations without depending on public internet access.", fit: "Venues, organizers, and event teams that need reliable on-site coordination and attendee service.", points: ["Attendee-facing workflows that remain available throughout an event", "Venue operations for schedules, staff, and live coordination", "Private operational visibility for the people running the experience"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"], preview: { src: "./assets/events-preview.mp4", title: "Events environment" } },
+  { key: "hospitality", label: "Hospitality", title: "Property and guest operations", teaser: "On-site service. Private control.", summary: "A guest-facing and staff-facing experience shaped around the rhythm of a property, with the appliance kept on-site.", fit: "Hotels and hospitality teams where service quality, continuity, and local control matter.", points: ["Guest service workflows that remain available on the property", "Operations tools for staff, scheduling, and coordination", "Private daily visibility for the people running the site"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"], preview: { src: "./assets/hospitality-preview.mp4", title: "Hospitality environment" } },
+  { key: "operations", label: "Managed Service Provider", title: "Branch, edge, and field infrastructure deployments", teaser: "Reliable across sites and teams.", summary: "A practical appliance-led approach for organizations that need local resilience across sites.", fit: "Distributed teams that need repeatability across branches, remote sites, or controlled environments.", points: ["Operational views tailored to each location", "Consistent rollout patterns across teams and sites", "Local continuity when connectivity is limited"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"], preview: { src: "./assets/managed-service-preview.mp4", title: "Managed service environment" } },
+  { key: "private-ai", label: "Private AI", title: "Internal tools and controlled workflows", teaser: "Useful AI, kept close to your team.", summary: "AI-assisted internal experiences that stay close to the business environment and its operating choices.", fit: "Teams that want helpful automation without making public cloud their default.", points: ["Private assistants for internal search, guidance, and task support", "Workflow tools kept close to the business environment", "Controlled operation for organizations that value privacy"], modes: ["Local LAN", "Air-gapped", "VPS / Cloud"], preview: { src: "./assets/private-ai-preview.mp4", title: "Private AI environment" } },
 ];
 
 const deployments = [
@@ -13,11 +13,30 @@ const deployments = [
   { key: "lan-cloud-backup", label: "LAN + backup", title: "Single-node or multi-node LAN with cloud backup", teaser: "Local operation with protected recovery.", summary: "The solution runs locally on the LAN while selected data is backed up to the cloud for recovery and continuity.", fit: "Organizations that want local performance and control with an additional recovery layer.", points: ["Keeps primary operation on the local network", "Backs up selected data on a defined schedule", "Restores confidently if a local device needs replacement"], modes: ["Local LAN", "Cloud backup", "Recovery-ready"] },
 ];
 
-function setupSelector({ items, gridSelector, detailId, cardClass, tabPrefix, fields }) {
+function setupSelector({ items, gridSelector, detailId, cardClass, tabPrefix, fields, preview }) {
   const grid = document.querySelector(gridSelector);
   const detailCard = document.getElementById(detailId);
   const detailFields = Object.fromEntries(Object.entries(fields).map(([name, id]) => [name, document.getElementById(id)]));
   const itemsByKey = new Map(items.map((item) => [item.key, item]));
+  let activePreview;
+
+  if (preview) {
+    preview.tile.addEventListener("click", () => {
+      if (!activePreview) return;
+      preview.video.src = activePreview.src;
+      preview.dialog.showModal();
+      preview.video.play().catch(() => {});
+    });
+    preview.close.addEventListener("click", () => preview.dialog.close());
+    preview.dialog.addEventListener("close", () => {
+      preview.video.pause();
+      preview.video.removeAttribute("src");
+      preview.video.load();
+    });
+    preview.dialog.addEventListener("click", (event) => {
+      if (event.target === preview.dialog) preview.dialog.close();
+    });
+  }
 
   grid.replaceChildren(...items.map((item) => {
     const card = document.createElement("button");
@@ -42,6 +61,13 @@ function setupSelector({ items, gridSelector, detailId, cardClass, tabPrefix, fi
     detailFields.fit.textContent = item.fit;
     detailFields.points.innerHTML = item.points.map((point) => `<li>${point}</li>`).join("");
     detailFields.modes.innerHTML = item.modes.map((mode) => `<span>${mode}</span>`).join("");
+    if (preview) {
+      activePreview = item.preview;
+      preview.body.classList.add("has-preview");
+      preview.title.textContent = activePreview.title;
+      preview.art.classList.toggle("has-thumbnail", Boolean(activePreview.thumbnail));
+      preview.art.style.setProperty("--preview-thumbnail", activePreview.thumbnail ? `url("${activePreview.thumbnail}")` : "");
+    }
     cards.forEach((card) => {
       const selected = card.dataset.option === key;
       card.classList.toggle("is-selected", selected);
@@ -79,6 +105,15 @@ setupSelector({
   cardClass: "vertical-card",
   tabPrefix: "vertical",
   fields: { label: "detail-label", title: "detail-title", summary: "detail-summary", fit: "detail-fit", points: "detail-points", modes: "detail-modes" },
+  preview: {
+    body: document.getElementById("detail-body"),
+    tile: document.getElementById("detail-preview"),
+    art: document.querySelector(".solution-preview-art"),
+    title: document.getElementById("detail-preview-title"),
+    dialog: document.getElementById("solution-preview-dialog"),
+    video: document.getElementById("solution-preview-video"),
+    close: document.getElementById("solution-preview-close"),
+  },
 });
 
 setupSelector({
