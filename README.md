@@ -16,4 +16,4 @@ A self-contained static homepage for Zoneon Technologies, ready to deploy throug
 - VPS / Cloud is presented as an optional extension for solutions that need wider reach.
 - The solution cards can later become dedicated pages or live demos.
 
-The contact section invites beta partnerships at `admin@zoneon.net`.
+The contact section invites beta partnerships at `sales@zoneon.net`.
